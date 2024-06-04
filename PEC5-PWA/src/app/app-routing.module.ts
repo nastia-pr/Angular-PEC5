@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { ImagesListComponent } from './components/images-list/images-list.component';
+import { ImagesDetailComponent } from './components/images-detail/images-detail.component';
+
+const routes: Routes = [
+  {path: '', component: ImagesListComponent},
+  {path: 'image/:id', component: ImagesDetailComponent},
+  {path: '**', component: ImagesListComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
