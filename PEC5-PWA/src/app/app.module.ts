@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

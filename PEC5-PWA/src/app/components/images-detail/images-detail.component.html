@@ -1,26 +1,55 @@
-<div class="container mt-5">
+<div
+  class="container mt-5 p-4"
+  style="background-color: #f8f9fa; border-radius: 10px"
+>
   <div
     *ngIf="character"
     class="row animate__animated animate__bounce animate__fadeIn"
   >
-    <div class="col-md-9">
-      <p><strong>ID:</strong> {{ character.id }}</p>
-      <p><strong>Name:</strong> {{ character.name }}</p>
-      <p><strong>Status:</strong> {{ character.status }}</p>
-      <p><strong>Species:</strong> {{ character.species }}</p>
-      <p><strong>Gender:</strong> {{ character.gender }}</p>
-      <p><strong>Origin:</strong> {{ character.origin.name }}</p>
-      <p><strong>Location:</strong> {{ character.location.name }}</p>
-      <img
-        style="width: 80%; height: 80%"
-        class="rounded"
-        src="{{ character.image }}"
-        alt="{{ character.name }}"
-      />
+    <!-- Título de la Entidad -->
+    <div class="col-12 text-center">
+      <h2>{{ character.name }}</h2>
     </div>
 
-    <div class="col-md-3">
+    <!-- Botón de "Back" -->
+    <div class="col-12 text-right mt-3">
       <a class="btn btn-danger" routerLink="/">Back</a>
+    </div>
+
+    <!-- Botón para Mostrar Todos los Detalles -->
+    <div class="col-12 text-center mt-3">
+      <button class="btn btn-primary" (click)="toggleDetails()">
+        {{ showAllDetails ? "Hide All Details" : "Show All Details" }}
+      </button>
+    </div>
+
+    <!-- Detalles Adicionales -->
+    <div *ngIf="showAllDetails" @fadeInOut class="col-12 mt-3">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="color: white">
+            Additional Details
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="col-12 text-center">
+          <p style="margin-top: 20px">
+            <strong>ID:</strong> {{ character.id }}
+          </p>
+          <p><strong>Status:</strong> {{ character.status }}</p>
+          <p><strong>Species:</strong> {{ character.species }}</p>
+          <p><strong>Gender:</strong> {{ character.gender }}</p>
+          <p><strong>Origin:</strong> {{ character.origin.name }}</p>
+          <p><strong>Location:</strong> {{ character.location.name }}</p>
+          <!-- Imagen de la Entidad -->
+
+          <img
+            style="width: 50%; height: 50%"
+            class="rounded"
+            [src]="character.image"
+            [alt]="character.name"
+          />
+        </div>
+      </mat-expansion-panel>
     </div>
   </div>
 </div>
