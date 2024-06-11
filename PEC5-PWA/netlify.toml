@@ -1,0 +1,6 @@
+[build]
+  command = "npm install && npm run build -- --configuration production"
+  publish = "dist/pec5-pwa"
+
+[[plugins]]
+  package = "@netlify/plugin-angular-universal"
