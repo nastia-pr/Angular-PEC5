@@ -6,7 +6,7 @@ import { ImagesDetailComponent } from './components/images-detail/images-detail.
 
 const routes: Routes = [
   {path: '', component: ImagesListComponent},
-  {path: 'image/:id', component: ImagesDetailComponent},
+  {path: 'character/:id', component: ImagesDetailComponent},
   {path: '**', component: ImagesListComponent}
 ];
 

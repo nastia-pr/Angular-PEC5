@@ -34,7 +34,7 @@
     {
       "name": "images-api",
       "urls": [
-        "https://picsum.photos/**"
+        "https://rickandmortyapi.com/api/**"
       ],
       "cacheConfig": {
         "maxSize": 10,

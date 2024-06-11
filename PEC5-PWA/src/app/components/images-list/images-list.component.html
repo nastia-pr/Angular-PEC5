@@ -1,12 +1,88 @@
 <div class="container">
-  <h1>Images</h1>
-  <ul class="list-group">
-    <a
-      *ngFor="let image of images"
-      [routerLink]="['/image', image.id]"
-      class="list-group-item list-group-item-action animate__animated animate__bounce animate__fadeIn"
+  <h1>Characters</h1>
+
+  <div class="d-flex justify-content-end mb-3" style="gap: 10px">
+    <!-- Botón para cambiar a la vista de cards -->
+    <div class="d-flex justify-content-end mb-3">
+      <button
+        mat-raised-button
+        class="customBtn"
+        color="primary"
+        (click)="setViewMode('cards')"
+      >
+        <mat-icon>view_module</mat-icon>
+      </button>
+    </div>
+
+    <!-- Botón para cambiar a la vista de tabla -->
+    <div class="d-flex justify-content-end mb-3">
+      <button
+        mat-raised-button
+        class="customBtn"
+        color="primary"
+        (click)="setViewMode('table')"
+      >
+        <mat-icon>view_agenda</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <mat-spinner *ngIf="isLoadingCharacters" diameter="100"></mat-spinner>
+  </div>
+
+  <!-- Vista de cards -->
+  <div *ngIf="!isLoadingCharacters && viewMode === 'cards'" class="row">
+    <mat-card
+      *ngFor="let character of characters"
+      class="col-md-3 mb-3 animate__animated animate__bounce animate__fadeIn"
+      [routerLink]="['/character', character.id]"
     >
-      {{ image.id }} - {{ image.author }}
-    </a>
-  </ul>
+      <img [src]="character.image" alt="{{ character.name }}" mat-card-image />
+      <mat-card-content>
+        <p><strong>ID:</strong> {{ character.id }}</p>
+        <p><strong>Name:</strong> {{ character.name }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Vista de tabla -->
+  <div
+    *ngIf="!isLoadingCharacters && viewMode === 'table'"
+    class="mat-elevation-z8"
+  >
+    <table mat-table [dataSource]="characters" class="mat-table">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let character">{{ character.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let character">{{ character.name }}</td>
+      </ng-container>
+
+      <!-- Image Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let character">
+          <img
+            [src]="character.image"
+            alt="{{ character.name }}"
+            class="character-image"
+          />
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [routerLink]="['/character', row.id]"
+        class="animate__animated animate__bounce animate__fadeIn"
+      ></tr>
+    </table>
+  </div>
 </div>

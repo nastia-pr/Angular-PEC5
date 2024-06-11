@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Image } from 'src/app/models/image.interface';
+import { Character } from 'src/app/models/character.interface';
 import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ImagesService } from 'src/app/services/images.service';
 })
 export class ImagesDetailComponent implements OnInit {
 
-  image!: Image;
+  character!: Character;
 
   constructor (
     private imagesService: ImagesService,
@@ -23,12 +23,12 @@ export class ImagesDetailComponent implements OnInit {
       console.log('Identifier:', identifier);
 
       if (identifier) {
-        this.imagesService.getImageById(identifier).subscribe((image) => {
-          if (!image) {
+        this.imagesService.getCharacterById(identifier).subscribe((character) => {
+          if (!character) {
             this.router.navigateByUrl('/');
           } else {
-            this.image = image;
-            console.log('Image:', this.image);
+            this.character = character;
+            console.log('Character:', this.character);
           }
         });
       } else {

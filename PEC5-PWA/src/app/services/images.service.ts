@@ -2,20 +2,23 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Image } from '../models/image.interface';
+import { Character } from '../models/character.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImagesService {
 
+  private apiUrl = 'https://rickandmortyapi.com/api';
+
   constructor(private http: HttpClient) { }
 
-  getAllImages(): Observable<Image[]> {
-    return this.http.get<Image[]>('https://picsum.photos/v2/list');
+
+  getAllCharacters(): Observable<{ results: Character[] }> {
+    return this.http.get<{ results: Character[] }>(`${this.apiUrl}/character`);
   }
 
-  getImageById(id: String): Observable<Image> {
-    return this.http.get<Image>('https://picsum.photos/id/' + id + '/info');
+  getCharacterById(id: string): Observable<Character> {
+    return this.http.get<Character>(`${this.apiUrl}/character/${id}`);
   }
 }
